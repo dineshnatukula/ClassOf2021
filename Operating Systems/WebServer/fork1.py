@@ -92,3 +92,9 @@ print(execute_script("odd.py"))
 # http://127.0.0.1:8888/bin/sh?filename=forever
 # http://127.0.0.1:8888/bin/ls?args=-l
 # http://127.0.0.1:8888/bin/du
+# http://127.0.0.1:8888/bin/sh?filename=forever
+# http://127.0.0.1:8888/bin/ls?args=-l
+# http://127.0.0.1:8888/bin/du
+# http://127.0.0.1:8888/bin/sh?filename=forever
+# http://127.0.0.1:8888/bin/ls?args=-l
+# http://127.0.0.1:8888/bin/du
