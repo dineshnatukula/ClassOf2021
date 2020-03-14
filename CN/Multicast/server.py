@@ -1,3 +1,5 @@
+''' This is a UDP server that uses a multicasting to receive messages'''
+
 import socket
 import struct
 import sys
