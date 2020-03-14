@@ -1,27 +1,28 @@
 import sys
 hrs = mns = sec = spd = res = 0
-eTime = sTime = tmpSpd = 0
+etime = stime = tmpSpd = 0
 for line in sys.stdin:
-    l = line.split(":")
-    hrs = int(l[0])
-    mns = int(l[1])
-    l2 = l[2].split(" ")
-    spd = 0
-    if len(l2) == 2:
-        sec = int(l2[0])
-        spd = int(l2[1])
+    l = line.split()
+    if len(l) == 2:
+        spd = int(l[1])
     else:
-        sec = int(l[2])
-    # print (mns, mns/60)
-    # print (hrs , " ::: " , mns%60 , " ::: " , sec%60)
-    etime = hrs + (mns/60) + (sec/3600)
-    print (spd)
-    if spd == 0:
-        res = res + (eTime - sTime) * tmpSpd
-        print (line, res,  " km")
+        spd = 0
+    l1 = l[0].split(":")
+    hrs = int(l1[0])
+    mns = int(l1[1])
+    sec = int(l1[2])
+    # print(hrs, mns, sec, spd)
+    etime = hrs + mns / 60 + sec / 3600
+    if (len(l) != 2):
+        res += (etime - stime) * tmpSpd
+        # print (spd, etime, stime)
+        # answer = str(round(res, 2))
+        print(l[0], "%.2f" % res, "km")
+        # print("km", end = " ")
     else:
-        res = res + (eTime - sTime) * tmpSpd
-        print("here...", tmpSpd, res)
-    sTime = eTime
-    if len(l2) == 2:
+        res += (etime - stime) * tmpSpd
+        # print ("in else")
+        # print (spd, etime, stime, res)
         tmpSpd = spd
+    stime = etime
+# print()

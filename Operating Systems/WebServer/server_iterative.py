@@ -10,9 +10,9 @@ from io import StringIO
 from _thread import *
 import threading
 
-DOC_ROOT = "/Sankar/2021/ClassOf2021/Operating Systems/Web Server"
+DOC_ROOT = "/Sankar/ClassOf2021/Operating Systems/WebServer"
+cache_lst = {}
 enable_directory_browsing = True
-
 
 '''Initialize the webserver with a port and IP
 and return socket
@@ -24,6 +24,20 @@ def init(IP, port):
    sock.bind((IP, port))
    print ("socket binded to %s" %(port))
    return sock
+
+def cache_hit(uri):
+    for t in cache_lst:
+        if t[0] == uri:
+            cache_lst.remove(t)
+            cache_lst.append(t)
+            return t[1]
+    return None
+
+def cache_miss(uri, http_response):
+    if len(cache_lst) < 10:
+        cache_lst.append((uri, http_response))
+    else:
+        cache_lst.remove()
 
 '''
 start server to listen for connections
@@ -45,14 +59,30 @@ def serve_clients(socket):
         conn, addr = socket.accept()
         # print 'Got connection from', addr
         http_request  = conn.recv(1024)
+
         if http_request.decode().find("favicon.ico")!=-1:
             conn.close()
             continue
-        print("REquest :::::::::::: ", http_request)
-        http_response = handle_request(http_request)
-        print("RESEponse :::::::::: ", http_response)
+        uri = get_uri(request)
+        if uri in cache:
+            return cache[uri]
+        else:
+            print("REquest :::::::::::: ", http_request)
+            http_response = handle_request(http_request)
+            if cache.size() < 5:
+                cache[uri] = http_response
+            else:
+
+            print("RESEponse :::::::::: ", http_response)
         conn.send(http_response.encode())
         conn.close()
+
+def get_uri(request):
+    if (flag):
+        uri = re.split(" ", request)[1]
+        # uri = uri[1:]
+        print ("URI : " , uri)
+    return uri
 
 '''
 handle http request and return response data
@@ -63,11 +93,7 @@ def handle_request(request):
     flag = re.match("GET ", request)
     file_data = ""
     
-    if (flag):
-        uri = re.split(" ", request)[1]
-        # uri = uri[1:]
-        print ("URI : " , uri)
-    
+    uri = get_uri(request)
 
     if (uri == "favicon.ico"):
         pass
@@ -116,7 +142,7 @@ def list_direcctory(dirpath):
             <table>
             <th>Name</th><th>Size</th><th>Last Modified</th>
         """
-    try: 
+    try:
         response=response+"<tr><td><a href='./"+parent+"'>..</a></td><td></td><td></td></tr>"      
         for filename in os.listdir(dirpath):
             info = os.stat(dirpath+"/"+filename)

@@ -28,9 +28,9 @@ Original file is located at
 import requests
 
 # update the values according to your ip and port number.
-ip = "127.0.0.1"
+host = "127.0.0.1"
 port = "1239"
-url = "http://" + ip + ":" + port + "/"
+url = "http://" + host + ":" + port + "/"
 file_name = "index.html"
 print (url)
 
@@ -45,7 +45,6 @@ def Testcase(r, expstatuscode, expcontenttype, exptext, count):
         print("Wrong content-type")
         return False
     if r.text != exptext:
-        print(r.text, ": :", exptext)
         print("Wrong content")
         return False
     return True
@@ -63,10 +62,11 @@ print()
 # print(r.headers)
 # print(r.status_code)
 # print(r.text)
-if Testcase(r, 200, "text/html", "<h1>Webserver Under construction</h1>",1):
+if Testcase(r, 200, "text/html", "<h1>Webserver Under construction</h1>", 1):
 	print("TestCase-1 passed")
 else:
 	print("TestCase-1 Failed")
+
 
 # Make sure your tiny web server should handle only GET request method.
 # The following test case is to send the request other than GET. 

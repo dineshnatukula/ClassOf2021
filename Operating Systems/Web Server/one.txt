@@ -1,5 +1,0 @@
-fb67be5d9563379f8e17bc142fd795d6946d78bb
-
-09472724ef9437c09a61f137012cd99bd2edd219
-
-https://github.com/msitcontent/Computer-and-Operating-Systems.git

@@ -21,11 +21,11 @@ def parent_child():
         fd = os.open( "foo.txt", os.O_RDWR|os.O_CREAT )
         os.dup2(0, fd)
         
-        execfile("odd.py")
-        os.lseek(fd, 0, 0)
-        str = os.read(fd, 100)
-        print "Read String is : ", str
-        os.close( fd )
+        exec(open("odd.py").read())
+        # os.lseek(fd, 0, 0)
+        # str = os.read(fd, 100)
+        # print ("Read String is : ", str)
+        # os.close( fd )
 
         # #s = os.popen("python odd.py")
         # # text = b"Hello child process"

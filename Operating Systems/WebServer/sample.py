@@ -1,7 +1,7 @@
 import sys
 t = int(input())
 l = []
-i = 0
+i = 2
 for line in sys.stdin:
     # n = int(input())
     n = int(line)
