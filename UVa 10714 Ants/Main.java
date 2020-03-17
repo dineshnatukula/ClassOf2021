@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int t = scan.nextInt();
@@ -20,5 +19,6 @@ public class Main {
             }
             System.out.println(min + " " + max);
         }
+        scan.close();
     }
 }

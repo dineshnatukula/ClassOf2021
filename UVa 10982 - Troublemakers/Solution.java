@@ -42,7 +42,6 @@ class Pair {
             ", y='" + getY() + "'" +
             "}";
     }
-
 }
 
 public class Solution {
@@ -91,5 +90,6 @@ public class Solution {
             }
             System.out.println();
         }
+        scan.close();
     }
 }
